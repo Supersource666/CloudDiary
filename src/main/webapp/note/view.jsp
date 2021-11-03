@@ -38,6 +38,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="typeId" class="col-sm-2 control-label">内容</label>
+                                <div class="col-sm-8">
+<%--                                    加载富文本编辑器--%>
+                                    <textarea id =content name="content">
+
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-sm-12">
 <%--                                    判断类型列表是否为空，如果为空，提示用户先添加类型--%>
                                     <c:if test="${empty typeList}">

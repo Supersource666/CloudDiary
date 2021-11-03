@@ -21,11 +21,12 @@ public class NoteTypeServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //设置首页导航高亮
-        request.setAttribute("menu_Page","type");
+
 
         //得到用户行为
         String actionName = request.getParameter("actionName");
+        //设置首页导航高亮
+        request.setAttribute("menu_page","type");
         //判断用户行为
         if ("list".equals(actionName)) {
             //查询类型列表
