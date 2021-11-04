@@ -16,69 +16,61 @@
             <div class="container-fluid">
                 <div class="row" style="padding-top: 20px;">
                     <div class="col-md-12">
-                        <form class="form-horizontal" method="post" action="note" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="typeId" class="col-sm-2 control-label">类别</label>
-                                <div class="col-sm-6">
-                                    <select id="typeId"class="form-control" name="typeId">
-                                        <option value="1">请选择云集类别...</option>
-                                        <option value="2">技术</option>
-                                        <option value="3">笔记</option>
-                                        <option value="4" selected="">语录</option>
-                                        <option value="5" selected="">test</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" name="noteId" value="28">
-                                <input type="hidden" name="act" value="save">
-                                <label for="typeId" class="col-sm-2 control-label">标题</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" name="title" id="title" placeholder="云记标题" value="12">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="typeId" class="col-sm-2 control-label">内容</label>
-                                <div class="col-sm-8">
-<%--                                    加载富文本编辑器--%>
-                                    <textarea id =content name="content">
-
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <div class="col-sm-12">
 <%--                                    判断类型列表是否为空，如果为空，提示用户先添加类型--%>
                                     <c:if test="${empty typeList}">
                                         <h2>暂未查询到用户</h2>
                                         <h4><a href="type?actionName=list">添加类型</a></h4>
                                     </c:if>
-                                    <c:if test="${empty typeList}">
+                                    <c:if test="${!empty typeList}">
                                        <form class="form-horizontal" method="post" action="note">
+<%--                                           设置隐藏域，用来存放用户行为actionName--%>
+                                           <input type ="hidden" name="actionName" value="addOrUpdate"
                                            <div class="form-group">
                                                <label for="typeId" class="col-sm-2 control-label">类别</label>
                                                <div class="col-sm-8">
                                                    <select id="typeId" class="form-control" name="typeId">
-                                                       <option value="-1">请选择云记类别...</option>
+                                                       <option value="1">请选择云记类别...</option>
                                                        <c:forEach var="item" items="${typeList}">
                                                            <option value="${item.typeId}">${item.typeName}</option>
                                                        </c:forEach>
-                                                       <option value="2">技术</option>
                                                    </select>
                                                </div>
                                            </div>
-
-                                    </c:if>
+                                           <div class="form-group">
+                                               <label for="title" class="col-sm-2 control-label">标题</label>
+                                               <div class="col-sm-8">
+                                                   <input class="form-control" name="title" id="title" placeholder="云记标题" value="12">
+                                               </div>
+                                           </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">内容</label>
+                                    <div class="col-sm-8">
+                                        <%-- 加载富文本编辑器--%>
+                                        <textarea id ="content" name="content"></textarea>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-offset-6 col-sm-4"></div>
+                                    <div class="col-sm-offset-4 col-sm-4"></div>
                                     <input type="submit" class="btn btn-primary" onclick="return_saveNote();" value="保存">
+                                    <font id="error" color="red"></font>
                                 </div>
-                            </div>
-                         </form>
+                               </div>
+                            </form>
+                        </c:if>
                     </div>
                  </div>
             </div>
         </div>
      </div>
 </div>
+<script type="text/javascript">
+ // $(function(){
+ //     var editor =new UE.ui.Editor({initialFrameHeight:'100%',initialFrameWidth:'100%'});
+ //     editor.render("Editor");
+ // })
+    $(function (){
+    //加载富文本编辑器
+    var ue=UE.getEditor('content');
+    });
+</script>
