@@ -18,22 +18,22 @@
                     <div class="col-md-12">
                                 <div class="col-sm-12">
 <%--                                    判断类型列表是否为空，如果为空，提示用户先添加类型--%>
-                                    <c:if test="${empty typeList}">
-                                        <h2>暂未查询到用户</h2>
-                                        <h4><a href="type?actionName=list">添加类型</a></h4>
-                                    </c:if>
-                                    <c:if test="${!empty typeList}">
+<%--                                    <c:if test="${empty typeList}">--%>
+<%--                                        <h2>暂未查询到用户</h2>--%>
+<%--                                        <h4><a href="type?actionName=note">添加类型</a></h4>--%>
+<%--                                    </c:if>--%>
+<%--                                    <c:if test="${!empty typeList}">--%>
                                        <form class="form-horizontal" method="post" action="note">
 <%--                                           设置隐藏域，用来存放用户行为actionName--%>
-                                           <input type ="hidden" name="actionName" value="addOrUpdate"
+<%--                                           <input type ="hidden" name="actionName" value="addOrUpdate">--%>
                                            <div class="form-group">
                                                <label for="typeId" class="col-sm-2 control-label">类别</label>
                                                <div class="col-sm-8">
                                                    <select id="typeId" class="form-control" name="typeId">
-                                                       <option value="1">请选择云记类别...</option>
-                                                       <c:forEach var="item" items="${typeList}">
-                                                           <option value="${item.typeId}">${item.typeName}</option>
-                                                       </c:forEach>
+                                                       <option value="-1">请选择云记类别...</option>
+<%--                                                       <c:forEach var="item" items="${typeList}">--%>
+<%--                                                           <option value="${item.typeId}">${item.typeName}</option>--%>
+<%--                                                       </c:forEach>--%>
                                                    </select>
                                                </div>
                                            </div>
@@ -52,12 +52,12 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-4"></div>
-                                    <input type="submit" class="btn btn-primary" onclick="return_saveNote();" value="保存">
+                                    <input type="submit" class="btn btn-primary" onclick="returnCheckForm();" value="保存">
                                     <font id="error" color="red"></font>
                                 </div>
                                </div>
                             </form>
-                        </c:if>
+<%--                        </c:if>--%>
                     </div>
                  </div>
             </div>
@@ -68,9 +68,14 @@
  // $(function(){
  //     var editor =new UE.ui.Editor({initialFrameHeight:'100%',initialFrameWidth:'100%'});
  //     editor.render("Editor");
- // })
+ // });
     $(function (){
     //加载富文本编辑器
-    var ue=UE.getEditor('content');
+        var ue =UE.getEditor('content');
     });
+
+    // function CheckForm(){
+    //   var typeId=$("#typeId").val();
+    //   var title=$("#title").val();
+    // }
 </script>
