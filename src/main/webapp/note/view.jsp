@@ -30,9 +30,10 @@
                                                <label for="typeId" class="col-sm-2 control-label">类别</label>
                                                <div class="col-sm-8">
                                                    <select id="typeId" class="form-control" name="typeId">
-                                                       <option value="-1">请选择云记类别...</option>
+                                                       <option value="">请选择云记类别...</option>
 <%--                                                       <c:forEach var="item" items="${typeList}">--%>
 <%--                                                           <option value="${item.typeId}">${item.typeName}</option>--%>
+                                                       <option value="1">私人日记</option>
 <%--                                                       </c:forEach>--%>
                                                    </select>
                                                </div>
@@ -52,7 +53,8 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-4"></div>
-                                    <input type="submit" class="btn btn-primary" onclick="returnCheckForm();" value="保存">
+                                    <input type="submit" class="btn btn-primary" onclick="return CheckForm();" value="保存">
+                                    &nbsp;<span id="msg" style="font-size:12px;color:red"></span>
                                     <font id="error" color="red"></font>
                                 </div>
                                </div>
@@ -69,13 +71,29 @@
  //     var editor =new UE.ui.Editor({initialFrameHeight:'100%',initialFrameWidth:'100%'});
  //     editor.render("Editor");
  // });
+    var ue;
     $(function (){
     //加载富文本编辑器
-        var ue =UE.getEditor('content');
+         ue =UE.getEditor('content');
     });
 
-    // function CheckForm(){
-    //   var typeId=$("#typeId").val();
-    //   var title=$("#title").val();
-    // }
+    function CheckForm(){
+      var typeId=$("#typeId").val();
+      var title=$("#title").val();
+      var content=ue.getContent();
+      /*参数非空判断*/
+        if(isEmpty(typeId)){
+    $("#msg").html("请选择云记类型！")
+     return false;
+     }
+        if(isEmpty(title)){
+            $("#msg").html("云集标题不能够为空！")
+            return false;
+        }
+        if(isEmpty(content)){
+            $("#msg").html("云集内容不能够为空！")
+            return false;
+        }
+      return true;
+    }
 </script>
